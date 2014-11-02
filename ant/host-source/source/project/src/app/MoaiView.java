@@ -17,6 +17,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.MotionEvent;
 import android.util.DisplayMetrics;
+import android.graphics.PixelFormat;
 
 // Moai
 import com.ziplinegames.moai.*;
@@ -51,6 +52,15 @@ public class MoaiView extends GLSurfaceView {
 		// Create a handler that we can use to post to the main thread and a pseudo-
 		// periodic runnable that will handle calling Moai.update on the main thread.
 		mHandler = new Handler ( Looper.getMainLooper ());
+
+
+		// Android Blending
+
+		setZOrderOnTop(true);
+    setEGLConfigChooser(8, 8, 8, 8, 16, 0);
+    getHolder().setFormat(PixelFormat.RGBA_8888);
+
+		// /Android Blending
 
 		setRenderer ( new MoaiRenderer ());
 		onPause (); // Pause rendering until restarted by the activity lifecycle.		
